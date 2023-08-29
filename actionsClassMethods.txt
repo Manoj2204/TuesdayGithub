@@ -1,0 +1,139 @@
+package actionsClass;
+
+import java.time.Duration;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.testng.annotations.Test;
+
+public class ActionClassAllMethods 
+{
+	WebDriver driver;
+	@Test
+	public void clickWebElement() throws Throwable 
+	{
+		driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+		driver.get("https://www.facebook.com/login/");
+		WebElement loginButton = driver.findElement(By.cssSelector("button[id='loginbutton']"));
+		//instance Actions class
+		Actions actions= new Actions(driver);
+		actions.click(loginButton).perform();
+		Thread.sleep(2000);
+		driver.quit();
+	}
+	@Test
+	public void contextClick() throws InterruptedException 
+	{
+		driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+		driver.get("https://www.facebook.com/login/");
+		//instance Actions class
+		Actions actions= new Actions(driver);
+		actions.contextClick().pause(1000).perform();
+		Thread.sleep(2000);
+		driver.quit();
+	}
+	@Test
+	public void clickAndHoldMoveToElementAndRelesed() throws Throwable 
+	{
+		driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+		driver.get("http://www.dhtmlgoodies.com/scripts/drag-drop-custom/demo-drag-drop-3.html");
+		//instance Actions class
+		Actions actions= new Actions(driver);
+		
+		//drag and drop from oslo to norway
+		WebElement source1 = driver.findElement(By.xpath("//div[@id='box1']"));
+		WebElement Target1 = driver.findElement(By.cssSelector("div[id='box101']"));
+		actions.clickAndHold(source1).moveToElement(Target1).release().build().perform();
+		
+		//drag and drop from Washington to United States
+		WebElement source2 = driver.findElement(By.cssSelector("div[id='box3']"));
+		WebElement Terget2 = driver.findElement(By.cssSelector("div[id='box103']"));
+		actions.clickAndHold(source2).moveToElement(Terget2).release().build().perform();
+		
+		//drag and drop from Rome to itly
+		WebElement source3 = driver.findElement(By.cssSelector("div[id='box6']"));
+		WebElement Target3 = driver.findElement(By.cssSelector("div[id='box106']"));
+		actions.clickAndHold(source3).moveToElement(Target3).release().build().perform();
+		
+		//drag and drop from Madrid to Spain
+		WebElement source4 = driver.findElement(By.cssSelector("div[id='box7']"));
+		WebElement Target4 = driver.findElement(By.cssSelector("div[id='box107']"));
+		actions.clickAndHold(source4).moveToElement(Target4).release().build().perform();
+		
+		//drag and drop from Seoul to South Korea
+		WebElement source5 = driver.findElement(By.cssSelector("div[id='box5']"));
+		WebElement Target5 = driver.findElement(By.cssSelector("div[id='box105']"));
+		actions.clickAndHold(source5).moveToElement(Target5).release().build().perform();
+		
+		
+		Thread.sleep(2000);
+		driver.quit();
+	}
+	@Test
+	public void moveOnSoManyElementAtTimeInMynthra() 
+	{
+		driver= new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("https://www.myntra.com/");
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+		Actions actions = new Actions(driver);
+		List<WebElement> allNavMenuOption = driver.findElements(By.xpath("//div[@class='desktop-navContent']"));
+		for (WebElement navOption : allNavMenuOption) 
+		{
+			//we have more than one action - composite action
+			//we can pause the series actions class action with the interval 
+			//pause(long pause) 
+			actions.moveToElement(navOption).pause(2000).perform();
+		}
+		
+	}
+	@Test
+	public void dragAndDrop() throws Throwable 
+	{
+		driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+		driver.get("http://www.dhtmlgoodies.com/scripts/drag-drop-custom/demo-drag-drop-3.html");
+		//instance Actions class
+		Actions actions= new Actions(driver);
+		
+		//drag and drop from oslo to norway
+		WebElement source1 = driver.findElement(By.xpath("//div[@id='box1']"));
+		WebElement Target1 = driver.findElement(By.cssSelector("div[id='box101']"));
+		actions.dragAndDrop(source1, Target1).build().perform();
+		
+		//drag and drop from Washington to United States
+		WebElement source2 = driver.findElement(By.cssSelector("div[id='box3']"));
+		WebElement Target2 = driver.findElement(By.cssSelector("div[id='box103']"));
+		actions.dragAndDrop(source2, Target2).build().perform();
+		
+		//drag and drop from Rome to itly
+		WebElement source3 = driver.findElement(By.cssSelector("div[id='box6']"));
+		WebElement Target3 = driver.findElement(By.cssSelector("div[id='box106']"));
+		actions.dragAndDrop(source3, Target3).build().perform();	
+		
+		//drag and drop from Madrid to Spain
+		WebElement source4 = driver.findElement(By.cssSelector("div[id='box7']"));
+		WebElement Target4 = driver.findElement(By.cssSelector("div[id='box107']"));
+		actions.dragAndDrop(source4, Target4).build().perform();
+		
+		//drag and drop from Seoul to South Korea
+		WebElement source5 = driver.findElement(By.cssSelector("div[id='box5']"));
+		WebElement Target5 = driver.findElement(By.cssSelector("div[id='box105']"));
+		actions.dragAndDrop(source5, Target5).build().perform();
+		Thread.sleep(3000);
+		driver.quit();
+		
+	}
+
+}
